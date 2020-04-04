@@ -80,12 +80,12 @@ $featured2 = new WP_Query($args4);
 						margin-top: -10px;
 						font-size: 0.9em;
 					}
-  .date-block {float: left; max-width: 48px; width: 48px; height: 80px; border: 1px solid #ecece9; text-align: center; font-weight: bold; margin-right: 10px;}
-  .date-block-top {background-color: #cc3333; color: white; padding: 5px; font-size: 1.0em; text-transform: uppercase;}
-  .date-block-bottom {font-size: 2.0em; padding-top: 10px;}
-  .label {padding:5px; font-weight:800; font-size:80%; text-transform:uppercase; max-width: 64px; width: 64px;}
-  .lbl-blu {background-color:#0099cc; color:#ffffff}
-  .lbl-red {background-color:#cc3333; color:#ffffff}
+					  .date-block {float: left; max-width: 48px; width: 48px; height: 80px; border: 1px solid #ecece9; text-align: center; font-weight: bold; margin-right: 10px;}
+					  .date-block-top {background-color: #cc3333; color: white; padding: 5px; font-size: 1.0em; text-transform: uppercase;}
+					  .date-block-bottom {font-size: 2.0em; padding-top: 10px;}
+					  .label {padding:5px; font-weight:800; font-size:80%; text-transform:uppercase; max-width: 64px; width: 64px;}
+					  .lbl-blu {background-color:#0099cc; color:#ffffff}
+					  .lbl-red {background-color:#cc3333; color:#ffffff}
 					}
 			</style>
 		</div>
@@ -167,18 +167,18 @@ $featured2 = new WP_Query($args4);
 								?>
 							</div>
 							<h3 class="entry-title"><a href="<?php the_permalink();?>"><?php the_field('resource_title');?></a></h3>
-							<?php
-								$posts = get_field('presenters__authors_relation');
-								if( $posts ) {
-								    foreach( $posts as $p) {
-								    	$name = get_field('full_name', $p->ID);
-								    	$affiliation = get_field('affiliation', $p->ID);
-								    	$position = get_field('position', $p->ID);
-								    	$link = get_permalink($p->ID);
-								    	echo "<div class='entry-presenters'><a href='{$link}'>{$name}</a>, {$position}, {$affiliation} </div>";
-								    }
-								}								
-							?>
+								<?php
+									$posts = get_field('presenters__authors_relation');
+									if( $posts ) {
+									    foreach( $posts as $p) {
+									    	$name = get_field('full_name', $p->ID);
+									    	$affiliation = get_field('affiliation', $p->ID);
+									    	$position = get_field('position', $p->ID);
+									    	$link = get_permalink($p->ID);
+									    	echo "<div class='entry-presenters'><a href='{$link}'>{$name}</a>, {$position}, {$affiliation} </div>";
+									    }
+									}								
+								?>
 							<div ><span class="label lbl-blu"><?php the_field('pd_resource');?></span></div>
 							<p class="clearfix">
 								<?php 
@@ -284,6 +284,22 @@ $featured2 = new WP_Query($args4);
 				<?php 
 					$xtags = get_terms( array(
 						'taxonomy' 	=> 'experience_tags',
+						'hide_empty'=> true,
+						'orderby' 	=> 'count',
+						'order'		=> 'DESC'
+					)); 
+				?>
+				<ul>
+					<?php foreach( $xtags as $term ) : ?>
+						<li><a href="<?php print_r(esc_url( get_term_link( $term ))); ?>"> <?php print_r($term->name); ?></a> (<?php print_r($term->count) ?>)</li>
+					<?php endforeach; ?>
+				</ul>
+			</div><!-- .et_pb_column -->
+			<div class="et_pb_column et_pb_column_4_4 et_pb_column_0 et_pb_css_mix_blend_mode_passthrough">
+				<h2>Browse by Series</h2>
+				<?php 
+					$xtags = get_terms( array(
+						'taxonomy' 	=> 'series',
 						'hide_empty'=> true,
 						'orderby' 	=> 'count',
 						'order'		=> 'DESC'
