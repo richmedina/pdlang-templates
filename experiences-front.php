@@ -110,7 +110,7 @@ $featured2 = new WP_Query($args4);
 							</div>
 							<h2 class="entry-title"><a href="<?php the_permalink();?>"><?php the_title(); ?></a></h2>
 							<?php
-								$posts = get_field('presenters__authors_relation');
+								$posts = get_field('presenters__facilitators_relation');
 								if( $posts ) {
 								    foreach( $posts as $p) {
 								    	var_dump(get_field($p));
