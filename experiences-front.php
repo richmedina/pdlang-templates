@@ -113,8 +113,7 @@ $featured2 = new WP_Query($args4);
 								$posts = get_field('presenters__facilitators_relation');
 								if( $posts ) {
 								    foreach( $posts as $p) {
-								    	var_dump(get_field($p->post_title));
-								    	$name = get_field('post_title', $p->ID);
+								    	$name = $p->post_title;
 								    	$affiliation = get_field('affiliation', $p->ID);
 								    	$position = get_field('position', $p->ID);
 								    	$link = get_permalink($p->ID);
@@ -171,10 +170,10 @@ $featured2 = new WP_Query($args4);
 							</div>
 							<h3 class="entry-title"><a href="<?php the_permalink();?>"><?php the_title(); ?></a></h3>
 								<?php
-									$posts = get_field('presenters__authors_relation');
+									$posts = get_field('presenters__facilitators_relation');
 									if( $posts ) {
 									    foreach( $posts as $p) {
-									    	$name = get_field('post_title', $p->ID);
+									    	$name = $p->post_title;//get_field('post_title', $p->ID);
 									    	$affiliation = get_field('affiliation', $p->ID);
 									    	$position = get_field('position', $p->ID);
 									    	$link = get_permalink($p->ID);
