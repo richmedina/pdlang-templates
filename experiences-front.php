@@ -93,8 +93,9 @@ $featured2 = new WP_Query($args4);
 	<div class="et_pb_section et_pb_section_0 et_section_regular">							
 		<div class="et_pb_row et_pb_row_0">
 			<div class="et_pb_column et_pb_column_2_5 et_pb_column_0 et_pb_css_mix_blend_mode_passthrough">
-				<h2>Next Up</h2>
+				
 				<?php if ( $featured->have_posts() ) : ?>
+					<h2>Next Up</h2>
 					<?php  while ( $featured->have_posts() ) : $featured->the_post(); ?>
 			 			<article id="post-<?php the_ID()?>" class="et_pb_post clearfix post-<?php the_ID()?> experience type-experience status-publish has-post-thumbnail hentry">
 			 				<a href="<?php the_permalink();?>" class="entry-featured-image-url"><?php the_post_thumbnail();?></a>
@@ -151,8 +152,9 @@ $featured2 = new WP_Query($args4);
 			</div> <!-- .et_pb_column -->
 
 			<div class="et_pb_column et_pb_column_3_5 et_pb_column_1 et_pb_css_mix_blend_mode_passthrough left-blog-image">
-				<h2>Coming Soon</h2>
+				
 				<?php if ( $upcoming_posts->have_posts() ) : ?>
+					<h2>Coming Soon</h2>
 					<?php  while ( $upcoming_posts->have_posts() ) : $upcoming_posts->the_post(); ?>	
 			 			<article id="post-<?php the_ID()?>" class="et_pb_post clearfix post-<?php the_ID()?> experience type-experience status-publish has-post-thumbnail hentry">
 
@@ -171,7 +173,7 @@ $featured2 = new WP_Query($args4);
 									$posts = get_field('presenters__facilitators_relation');
 									if( $posts ) {
 									    foreach( $posts as $p) {
-									    	$name = get_field('full_name', $p->ID);
+									    	$name = get_field('post_title', $p->ID);
 									    	$affiliation = get_field('affiliation', $p->ID);
 									    	$position = get_field('position', $p->ID);
 									    	$link = get_permalink($p->ID);
