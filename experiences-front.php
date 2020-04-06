@@ -223,10 +223,10 @@ $featured2 = new WP_Query($args4);
 							<h3 class="entry-title"><a href="<?php the_permalink();?>"><?php the_field('resource_title');?></a></h3>
 							<div> <span style="float:right; font-size: 0.7em;"> Updated <?php echo the_modified_date();?></span></div>
 							<?php
-								$posts = get_field('presenters__authors_relation');
+								$posts = get_field('presenters__facilitators_relation');
 								if( $posts ) {
 								    foreach( $posts as $p) {
-								    	$name = get_field('full_name', $p->ID);
+								    	$name = get_field('pst_title', $p->ID);
 								    	$affiliation = get_field('affiliation', $p->ID);
 								    	$position = get_field('position', $p->ID);
 								    	$link = get_permalink($p->ID);
@@ -259,10 +259,10 @@ $featured2 = new WP_Query($args4);
 							<h4 class="entry-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
 							<div class="post-content"><span class="published"><?php the_field('start_date');?></span> </div>
 							<?php
-								$posts = get_field('presenters__authors_relation');
+								$posts = get_field('presenters__facilitators_relation');
 								if( $posts ) {
 								    foreach( $posts as $p) {
-								    	$name = get_field('full_name', $p->ID);
+								    	$name = get_field('post_title', $p->ID);
 								    	$affiliation = get_field('affiliation', $p->ID);
 								    	$position = get_field('position', $p->ID);
 								    	$link = get_permalink($p->ID);
