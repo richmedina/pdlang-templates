@@ -107,12 +107,12 @@ $featured2 = new WP_Query($args4);
 									echo "<div class='date-block-top'>{$mon}</div><div class='date-block-bottom'>{$day}</div>";
 								?>
 							</div>
-							<h2 class="entry-title"><a href="<?php the_permalink();?>"><?php the_field('resource_title');?></a></h2>
+							<h2 class="entry-title"><a href="<?php the_permalink();?>"><?php the_title(); ?></a></h2>
 							<?php
-								$posts = get_field('presenters__authors_relation');
+								$posts = get_field('presenters__facilitators_relation');
 								if( $posts ) {
 								    foreach( $posts as $p) {
-								    	$name = get_field('full_name', $p->ID);
+								    	$name = get_field('post_title', $p->ID);
 								    	$affiliation = get_field('affiliation', $p->ID);
 								    	$position = get_field('position', $p->ID);
 								    	$link = get_permalink($p->ID);
