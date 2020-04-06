@@ -113,7 +113,7 @@ $featured2 = new WP_Query($args4);
 								$posts = get_field('presenters__facilitators_relation');
 								if( $posts ) {
 								    foreach( $posts as $p) {
-								    	var_dump(get_field($p));
+								    	var_dump(get_field($p->post_title));
 								    	$name = get_field('post_title', $p->ID);
 								    	$affiliation = get_field('affiliation', $p->ID);
 								    	$position = get_field('position', $p->ID);
