@@ -67,26 +67,59 @@ $featured2 = new WP_Query($args4);
 	<div class="et_pb_module et_pb_code et_pb_code_0">				
 		<div class="et_pb_code_inner">
 			<style>				
-					.left-blog-image .et_pb_post .entry-featured-image-url {
-						float: left;
-						width: 100%;
-						max-width: 150px;
-						margin: 0px 20px 30px 0;
-					}
-					/*.left-blog-image .et_pb_post {
-						margin-bottom: 10px !important;
-					}*/
-					.entry-presenters {
-						margin-top: -10px;
-						font-size: 0.9em;
-					}
-					  .date-block {float: left; max-width: 48px; width: 48px; height: 80px; border: 1px solid #ecece9; text-align: center; font-weight: bold; margin-right: 10px;}
-					  .date-block-top {background-color: #cc3333; color: white; padding: 5px; font-size: 1.0em; text-transform: uppercase;}
-					  .date-block-bottom {font-size: 2.0em; padding-top: 10px;}
-					  .label {padding:5px; font-weight:800; font-size:80%; text-transform:uppercase; max-width: 64px; width: 64px;}
-					  .lbl-blu {background-color:#0099cc; color:#ffffff}
-					  .lbl-red {background-color:#cc3333; color:#ffffff}
-					}
+.left-blog-image .et_pb_post .entry-featured-image-url {
+	float: left;
+	width: 100%;
+	max-width: 150px;
+	margin: 0px 20px 30px 0;
+}
+.card-event-row {
+	/*Horizontal card wrapper with two columns:  */
+	display: grid;
+	grid-template-columns: 48px minmax(230px, 1fr); 
+	grid-gap: 10px;
+	/*       border-bottom: 6px solid lightgrey; */
+	padding: 10px;
+	grid-auto-flow: dense;
+}
+.card-event-row .card{
+	/*min-height: 100%;*/
+	display: grid;
+	grid-template-rows: auto 1fr auto;
+	grid-gap: 5px;		
+}
+.card-feature {
+  min-height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-gap: 10px;
+}
+
+.date-block {float: left; max-width: 48px; width: 48px; height: 80px; border: 1px solid #ecece9; text-align: center; font-weight: bold; margin-right: 10px;}
+.date-block-top {background-color: #cc3333; color: white; padding: 5px; font-size: 1.0em; text-transform: uppercase;}
+.date-block-bottom {font-size: 2.0em; padding-top: 10px;}
+/*.label {padding:5px; font-weight:800; font-size:80%; text-transform:uppercase; max-width: 64px; width: 64px;}*/
+/*.lbl-blu {background-color:#0099cc; color:#ffffff}*/
+/*.lbl-red {background-color:#cc3333; color:#ffffff}*/
+@media (max-width: 640px) {
+  .card-event-row {
+    /*grid-template-columns: 1fr;*/
+  }
+  /*.card-wrap-row img {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+    max-height: 200px;
+  }
+  .card-wrap-row.flip img {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+    max-height: 200px;
+  }
+  .card-wrap-row.flip {
+    grid-template-columns: 1fr;
+  }*/
+  .card-event-row .date-block {
+  	/*grid-row: 1;*/
+  }
+}
 			</style>
 		</div>
 	</div> <!-- .et_pb_code -->
@@ -95,55 +128,56 @@ $featured2 = new WP_Query($args4);
 			<div class="et_pb_column et_pb_column_2_5 et_pb_column_0 et_pb_css_mix_blend_mode_passthrough">
 				
 				<?php if ( $featured->have_posts() ) : ?>
-					<h2>Next Up</h2>
+					<h1>Next Up</h1>
 					<?php  while ( $featured->have_posts() ) : $featured->the_post(); ?>
-			 			<article id="post-<?php the_ID()?>" class="et_pb_post clearfix post-<?php the_ID()?> experience type-experience status-publish has-post-thumbnail hentry">
-			 				<a href="<?php the_permalink();?>" class="entry-featured-image-url"><?php the_post_thumbnail();?></a>
-							<div class="date-block">
-								<?php 
-									$s = get_field('start_date');
-									$d = getdate(strtotime($s));
-									$day = $d['mday'];
-									$mon = substr($d['month'], 0, 3);
-									echo "<div class='date-block-top'>{$mon}</div><div class='date-block-bottom'>{$day}</div>";
-								?>
-							</div>
-							<h2 class="entry-title"><a href="<?php the_permalink();?>"><?php the_title(); ?></a></h2>
-							<?php
-								$posts = get_field('presenters__facilitators_relation');
-								if( $posts ) {
-								    foreach( $posts as $p) {
-								    	$name = $p->post_title;
-								    	$affiliation = get_field('affiliation', $p->ID);
-								    	$position = get_field('position', $p->ID);
-								    	$link = get_permalink($p->ID);
-								    	echo "<div class='entry-presenters'><a href='{$link}'>{$name}</a>, {$position}, {$affiliation} </div>";
-								    }
-								}								
-							?>
-							<div ><span class="label lbl-blu"><?php the_field('pd_resource');?></span></div>
-							<p class="clearfix">
+			 			<article id="post-<?php the_ID()?>" class="et_pb_post clearfix post-<?php the_ID()?> has-post-thumbnail hentry card-feature">
+			 				<header>
+				 				<a href="<?php the_permalink();?>" class="entry-featured-image-url"><?php the_post_thumbnail();?></a>
+								
+								<div class="date-block">
+									<?php 
+										$s = get_field('start_date');
+										$d = getdate(strtotime($s));
+										$day = $d['mday'];
+										$mon = substr($d['month'], 0, 3);
+										echo "<div class='date-block-top'>{$mon}</div><div class='date-block-bottom'>{$day}</div>";
+									?>
+								</div>
+								<h2 class="entry-title"><a href="<?php the_permalink();?>"><?php the_title(); ?></a></h2>
+								<div>
+				            		<span class="label lbl-blu"><?php the_field('pd_resource');?></span>
+
+					                <?php         
+					                  $people = get_field('presenters__facilitators_relation');
+					                  if( $people ) {
+					                    echo " by ";
+					                    $len = count($people);
+					                    foreach( $people as $idx => $p) {
+					                      $name = $p->post_title;
+					                      $affiliation = get_field('affiliation', $p->ID);
+					                      $position = get_field('position', $p->ID);
+					                      $link = get_permalink($p->ID);
+					                      echo "<span><a href='{$link}'>{$name}</a>";
+					                      if ($idx === $len - 2) echo " & ";
+					                      else if ($idx < $len -1) echo ", ";
+					                      echo "</span>";
+					                    }
+					                  }
+					                ?>
+				            	</div>
+			            	</header>
+
+							<div>
 								<?php 
 									$blurb = get_field('resource_description');
-									$trim = wp_trim_words($blurb, 50, ' ...');
+									$trim = wp_trim_words($blurb, 60, ' ...');
 									echo $trim;							
 								?>								
-							</p>
-							<div class=""><p>
-								<?php 
-
-								// the_terms( get_the_ID(), 'experience_tags', '', ', '); 
-								$terms = get_the_terms($post->ID, 'experience_tags', 'Topics ', ', ');
-								if( $terms ) {
-								    foreach( $terms as $p) {
-								    	$name = $p->name;
-								    	$link = get_term_link($p);
-								    	echo "<a href='{$link}' class=''>{$name}</a>";
-								    }
-								}
-								?>
-									
-							</p></div>				
+							</div>
+							<div>
+								<div class=""><?php the_terms( get_the_ID(), 'series', '<i>Part of </i> ', ', '); ?></div>
+        						<div class="tags"><?php the_terms( get_the_ID(), 'experience_tags','', ''); ?></div>
+							</div>				
 						</article>
 					<?php endwhile; ?>
 				<?php endif; ?>		   
@@ -154,11 +188,10 @@ $featured2 = new WP_Query($args4);
 			<div class="et_pb_column et_pb_column_3_5 et_pb_column_1 et_pb_css_mix_blend_mode_passthrough left-blog-image">
 				
 				<?php if ( $upcoming_posts->have_posts() ) : ?>
-					<h2>Coming Soon</h2>
+					<h1>Coming Soon</h1>
 					<?php  while ( $upcoming_posts->have_posts() ) : $upcoming_posts->the_post(); ?>	
-			 			<article id="post-<?php the_ID()?>" class="et_pb_post clearfix post-<?php the_ID()?> experience type-experience status-publish has-post-thumbnail hentry">
-
-			 				<a href="<?php the_permalink();?>" class="entry-featured-image-url"><?php the_post_thumbnail();?></a>
+			 			<article id="post-<?php the_ID()?>" class=" card-event-row">
+			 				<!-- COL 1 -->
 							<div class="date-block">
 								<?php 
 									$s = get_field('start_date');
@@ -167,43 +200,45 @@ $featured2 = new WP_Query($args4);
 									$mon = substr($d['month'], 0, 3);
 									echo "<div class='date-block-top'>{$mon}</div><div class='date-block-bottom'>{$day}</div>";
 								?>
-							</div>
-							<h3 class="entry-title"><a href="<?php the_permalink();?>"><?php the_title(); ?></a></h3>
-								<?php
-									$posts = get_field('presenters__facilitators_relation');
-									if( $posts ) {
-									    foreach( $posts as $p) {
-									    	$name = $p->post_title;//$p->post_title;;
-									    	$affiliation = get_field('affiliation', $p->ID);
-									    	$position = get_field('position', $p->ID);
-									    	$link = get_permalink($p->ID);
-									    	echo "<div class='entry-presenters'><a href='{$link}'>{$name}</a>, {$position}, {$affiliation} </div>";
-									    }
-									}								
-								?>
-							<div ><span class="label lbl-blu"><?php the_field('pd_resource');?></span></div>
-							<p class="clearfix">
-								<?php 
-									$blurb = get_field('resource_description');
-									$trim = wp_trim_words($blurb, 20, ' ...');
-									echo $trim;							
-								?>								
-							</p>
-							<div class=""><p>
-								<?php 
+							</div>							
+							<!-- COL 2 -->
+							<div class="card">
+								<h3 class="entry-title"><a href="<?php the_permalink();?>"><?php the_title(); ?></a></h3>
+				                
+								<div>
+				            		<span class="label lbl-blu"><?php the_field('pd_resource');?></span>
 
-								// the_terms( get_the_ID(), 'experience_tags', '', ', '); 
-								$terms = get_the_terms($post->ID, 'experience_tags', 'Topics ', ', ');
-								if( $terms ) {
-								    foreach( $terms as $p) {
-								    	$name = $p->name;
-								    	$link = get_term_link($p);
-								    	echo "<a href='{$link}' class=''>{$name}</a>";
-								    }
-								}
-								?>
-									
-							</p></div>
+					                <?php         
+					                  $people = get_field('presenters__facilitators_relation');
+					                  if( $people ) {
+					                    echo " by ";
+					                    $len = count($people);
+					                    foreach( $people as $idx => $p) {
+					                      $name = $p->post_title;
+					                      $affiliation = get_field('affiliation', $p->ID);
+					                      $position = get_field('position', $p->ID);
+					                      $link = get_permalink($p->ID);
+					                      echo "<span><a href='{$link}'>{$name}</a>";
+					                      if ($idx === $len - 2) echo " & ";
+					                      else if ($idx < $len -1) echo ", ";
+					                      echo "</span>";
+					                    }
+					                  }
+					                ?>
+				            	</div>
+
+								<div>
+									<?php 
+										$blurb = get_field('resource_description');
+										$trim = wp_trim_words($blurb, 18, ' ...');
+										echo $trim;							
+									?>								
+								</div>
+								<div>
+									<div class="tag-series"><?php the_terms( get_the_ID(), 'series', '<i>Part of </i> ', ', '); ?></div>
+            						<div class="tags"><?php the_terms( get_the_ID(), 'experience_tags','', ''); ?></div>
+								</div>
+							</div> 
 						</article>
 					<?php endwhile; ?>
 				<?php else: ?>
@@ -218,32 +253,53 @@ $featured2 = new WP_Query($args4);
 				<h2>Recently Updated</h2>
 				<?php if ( $past_posts->have_posts() ) : ?>
 					<?php  while ( $past_posts->have_posts() ) : $past_posts->the_post(); ?>	
-						<article id="post-<?php the_ID()?>" class="et_pb_post clearfix post-<?php the_ID()?> experience type-experience status-publish has-post-thumbnail hentry">
-							<a href="<?php the_permalink();?>" class="entry-featured-image-url"><?php the_post_thumbnail();?></a> 
-							<h3 class="entry-title"><a href="<?php the_permalink();?>"><?php the_field('resource_title');?></a></h3>
-							<div> <span style="float:right; font-size: 0.7em;"> Updated <?php echo the_modified_date();?></span></div>
-							<?php
-								$posts = get_field('presenters__facilitators_relation');
-								if( $posts ) {
-								    foreach( $posts as $p) {
-								    	$name = $p->post_title;
-								    	$affiliation = get_field('affiliation', $p->ID);
-								    	$position = get_field('position', $p->ID);
-								    	$link = get_permalink($p->ID);
-								    	echo "<div class='post-content'><a href='{$link}'>{$name}</a> </div>";
-								    }
-								}								
-							?>
-							<div class="post-content"><span class="label lbl-blu"><?php the_field('pd_resource');?></span></div>
-							<div class="post-content"><p> 
-								<?php 
-									$blurb = get_field('resource_description');
-									$trim = wp_trim_words($blurb, 20, ' ...');
-									echo $trim;
-								?>
-							</p></div>
-								
-							<div class="post-content"><p><?php the_terms( get_the_ID(), 'experience_tags', '', ', '); ?></p>	</div>
+						<article id="post-<?php the_ID()?>" class="et_pb_post clearfix post-<?php the_ID()?> has-post-thumbnail hentry card-wrap-row">
+				            
+				            <aside class="card-wrap-sidebar">
+				        		<a href="<?php the_permalink(); ?>"> <?php the_post_thumbnail(); ?></a>        
+				      		</aside>
+
+					      	<div class="card">
+						        <header class="card-header">
+
+						          <h2 class="card-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a> </h2>
+						          <div class="">Updated <?php echo the_modified_date();?></div>
+
+						          <div class="card-meta">
+						              <a href="<?php the_field('url_website'); ?>"><span class="label lbl-blu pd_resource_label"><?php the_field('pd_resource');?></span></a>
+						                <?php         
+						                  $people = get_field('presenters__facilitators_relation');
+						                  if( $people ) {
+						                    echo " by ";
+						                    $len = count($people);
+						                    foreach( $people as $idx => $p) {
+						                      $name = $p->post_title;
+						                      $affiliation = get_field('affiliation', $p->ID);
+						                      $position = get_field('position', $p->ID);
+						                      $link = get_permalink($p->ID);
+						                      echo "<span><a href='{$link}'>{$name}</a>";
+						                      if ($idx === $len - 2) echo " & ";
+						                      else if ($idx < $len -1) echo ", ";
+						                      echo "</span>";
+						                    }
+						                  }
+						                ?>
+						          </div>
+						        </header>
+					        
+						        <div class='card-body'>         
+						            <?php 
+						            	$blurb = get_field('resource_description');
+						            	$trim = wp_trim_words($blurb, 100, ' ...');
+						            	echo "<p>{$trim}</p>";            
+						        	?>
+						        </div>
+
+						        <footer class="card-footer">
+						          <div class="tag-series"><?php the_terms( get_the_ID(), 'series', 'In ', ''); ?></div>
+						          <div class="tags"><?php the_terms( get_the_ID(), 'experience_tags','', ''); ?></div>
+						        </footer>
+					      	</div>
 						</article>
 					<?php endwhile; ?>
 				<?php endif; ?>		   
@@ -258,18 +314,25 @@ $featured2 = new WP_Query($args4);
 			 				<a href="<?php the_permalink();?>" class="entry-featured-image-url"><?php the_post_thumbnail();?></a>			
 							<h4 class="entry-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
 							<div class="post-content"><span class="published"><?php the_field('start_date');?></span> </div>
-							<?php
-								$posts = get_field('presenters__facilitators_relation');
-								if( $posts ) {
-								    foreach( $posts as $p) {
-								    	$name = $p->post_title;;
-								    	$affiliation = get_field('affiliation', $p->ID);
-								    	$position = get_field('position', $p->ID);
-								    	$link = get_permalink($p->ID);
-								    	echo "<div class='post-content'><a href='{$link}'>{$name}</a> </div>";
-								    }
-								}								
-							?>
+							<div>
+			                <?php         
+			                  $people = get_field('presenters__facilitators_relation');
+			                  if( $people ) {
+			                    echo " by ";
+			                    $len = count($people);
+			                    foreach( $people as $idx => $p) {
+			                      $name = $p->post_title;
+			                      $affiliation = get_field('affiliation', $p->ID);
+			                      $position = get_field('position', $p->ID);
+			                      $link = get_permalink($p->ID);
+			                      echo "<span><a href='{$link}'>{$name}</a>";
+			                      if ($idx === $len - 2) echo " & ";
+			                      else if ($idx < $len -1) echo ", ";
+			                      echo "</span>";
+			                    }
+			                  }
+			                ?>
+			            </div>
 							<div class="post-content"><span class="label lbl-blu"><?php the_field('pd_resource');?></span>
 							<div class="post-content"><?php the_field('resource_description');?></div>
 							<div class="post-content"><p><?php the_terms( get_the_ID(), 'experience_tags', '', ', '); ?></p>	</div>
