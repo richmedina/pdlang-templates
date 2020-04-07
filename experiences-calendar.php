@@ -51,12 +51,12 @@ $post_stream = new WP_Query($args);
             <div>
               <a href="<?php the_field('url_website'); ?>"><span class="label lbl-blu pd_resource_label"><?php the_field('pd_resource');?></span></a>
                 <?php         
-                  $people = get_field('presenters__authors_relation');
+                  $people = get_field('presenters__facilitators_relation');
                   if( $people ) {
                     echo " by ";
                     $len = count($people);
                     foreach( $people as $idx => $p) {
-                      $name = get_field('full_name', $p->ID);
+                      $name = $p->post_title;
                       $affiliation = get_field('affiliation', $p->ID);
                       $position = get_field('position', $p->ID);
                       $link = get_permalink($p->ID);
