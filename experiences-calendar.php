@@ -81,7 +81,7 @@ $post_stream = new WP_Query($args);
         </div>
 
         <footer class="card-footer">
-          <div class="tag-series"><?php the_terms( get_the_ID(), 'series', 'In ', ''); ?></div>
+          <div class="tag-series"><?php the_terms( get_the_ID(), 'series', 'In ', ', '); ?></div>
           <div class="tags"><?php the_terms( get_the_ID(), 'experience_tags','', ''); ?></div>
         </footer>
       </div>
