@@ -64,6 +64,7 @@ $featured2 = new WP_Query($args4);
 ?>	
 
 <div id="main-content">
+	
 	<div class="et_pb_module et_pb_code et_pb_code_0">				
 		<div class="et_pb_code_inner">
 			<style>				
@@ -123,7 +124,10 @@ $featured2 = new WP_Query($args4);
 			</style>
 		</div>
 	</div> <!-- .et_pb_code -->
-	<div class="et_pb_section et_pb_section_0 et_section_regular">							
+	<div class="et_pb_section et_pb_section_0 et_section_regular">
+		<div class="et_pb_row et_pb_row_0">
+			<h1>Professional Learning Experiences for Language Educators</h1>
+		</div>						
 		<div class="et_pb_row et_pb_row_0">
 			<div class="et_pb_column et_pb_column_2_5 et_pb_column_0 et_pb_css_mix_blend_mode_passthrough">
 				
@@ -290,7 +294,7 @@ $featured2 = new WP_Query($args4);
 						        <div class='card-body'>         
 						            <?php 
 						            	$blurb = get_field('resource_description');
-						            	$trim = wp_trim_words($blurb, 100, ' ...');
+						            	$trim = wp_trim_words($blurb, 20, ' ...');
 						            	echo "<p>{$trim}</p>";            
 						        	?>
 						        </div>
