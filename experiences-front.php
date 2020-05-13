@@ -126,7 +126,7 @@ $featured2 = new WP_Query($args4);
 	</div> <!-- .et_pb_code -->
 	<div class="et_pb_section et_pb_section_0 et_section_regular">
 		<div class="et_pb_row et_pb_row_0">
-			<h1>Professional Learning Experiences for Language Educators</h1>
+			<h1>Professional Learning Experiences in World Language Education</h1>
 		</div>						
 		<div class="et_pb_row et_pb_row_0">
 			<div class="et_pb_column et_pb_column_2_5 et_pb_column_0 et_pb_css_mix_blend_mode_passthrough">
