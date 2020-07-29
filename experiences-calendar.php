@@ -11,7 +11,7 @@ $args = array(
     // 'meta_value'       => date( "Y-m-d" ),
     // 'meta_compare'     => '>=',
     'order'         => 'DESC',
-    'orderby'     => 'start_date',
+    'orderby'     => 'meta_key',
     'offset'      => 0,
     'posts_per_page'  => 100,
 );
@@ -68,7 +68,7 @@ $post_stream = new WP_Query($args);
                   }
                 ?>
             </div>
-            <div><sub class="mod-date">Updated <?php echo the_modified_date();?></sub></div>
+            <div><sub class="mod-date">Updated <?php echo the_modified_date();?></sub>(<?php echo get_field('start_date');?>)</div>
           </div>
         </header>
         
