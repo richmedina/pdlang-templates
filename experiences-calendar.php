@@ -8,10 +8,8 @@ $args = array(
     'numberposts'     => -1,
     'post_type'       => 'experience',
     'meta_key'        => 'start_date',
-    // 'meta_value'       => date( "Y-m-d" ),
-    // 'meta_compare'     => '>=',
     'order'         => 'DESC',
-    'orderby'     => 'meta_key',
+    'orderby'     => 'start_date',
     'offset'      => 0,
     'posts_per_page'  => 100,
 );
