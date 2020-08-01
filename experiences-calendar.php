@@ -66,7 +66,7 @@ $post_stream = new WP_Query($args);
                   }
                 ?>
             </div>
-            <div><sub class="mod-date">Updated <?php echo the_modified_date();?></sub>(<?php echo get_field('start_date');?>)</div>
+            <div><sub class="mod-date">Updated <?php echo the_modified_date();?></sub></div>
           </div>
         </header>
         
